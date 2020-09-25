@@ -11,7 +11,7 @@ GAME FUNCTION:
 let min = 1,
   max = 10,
   // Set winning num to a function that generates a random number
-  winningNum = getRandomNum(),
+  winningNum = getRandomNum(min, max),
   guessesLeft = 3;
 
 // UI Elements
