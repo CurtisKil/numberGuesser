@@ -10,8 +10,8 @@ GAME FUNCTION:
 // Game Values
 let min = 1,
   max = 10,
-  // How can you make this different every time?
-  winningNum = 2,
+  // Set winning num to a function that generates a random number
+  winningNum = getRandomNum(),
   guessesLeft = 3;
 
 // UI Elements
@@ -29,6 +29,19 @@ const game = document.querySelector("#game"),
 // Assing UI min and max
 minNum.textContent = min;
 maxNum.textContent = max;
+
+// Play Again Event Listener
+/* 'mousedown' click event here prevents the page from 
+automatically reloading on submit and instead allows use to choose to click 'play again' to reload the pag
+*/
+game.addEventListener("mousedown", function (e) {
+  /* Use event delegation to target submit button
+      after the game is over */
+  if (e.target.className === "play-again") {
+    // Reload the page to play again
+    window.location.reload();
+  }
+});
 
 // Listen for guess
 guessBtn.addEventListener("click", function () {
@@ -84,6 +97,15 @@ function gameOver(won, msg) {
   message.style.color = color;
   // Set Winning Message
   setMessage(msg);
+
+  // Play Again?
+  guessBtn.value = "Play Again";
+  guessBtn.className += "play-again";
+}
+
+// Get Random Winning Number
+function getRandomNum(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 // Set Message
